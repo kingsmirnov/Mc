@@ -6,10 +6,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-    /* ⭐ NORMAL SOLID BACKGROUND — NO IMAGE ⭐ */
     body {
         margin: 0;
-        background: #060606; /* CHANGE THIS COLOR IF YOU WANT */
+        background: #060606;
         font-family: Inter, Arial, sans-serif;
         color: #fff;
         overflow-x: hidden;
@@ -19,11 +18,10 @@
 
     .back-home {
         position: absolute;
-        top: 20px;
-        left: 20px;
+        top: 22px;
+        left: 22px;
         color: #bdbdbd;
         font-size: 15px;
-        z-index: 10;
     }
 
     .container {
@@ -37,41 +35,47 @@
         box-sizing: border-box;
     }
 
+    /* ⭐ SMALLER LOGO + THICKER DARK PURPLE OUTLINE */
     .logo {
-        width: 72px;
-        height: 72px;
+        width: 56px;      /* smaller */
+        height: 56px;     /* smaller */
         background: #d946ef;
+        border: 3px solid #5a0f7a; /* thicker + darker purple */
+        border-radius: 4px;
+
         clip-path: polygon(
             25% 0%, 75% 0%,
             100% 50%,
             75% 100%, 25% 100%,
             0% 50%
         );
+
         display: flex;
         align-items: center;
         justify-content: center;
-        margin-bottom: 35px;
+        margin: 0 auto 24px auto;
     }
 
     .logo span {
         color: #ffffff;
-        font-size: 32px;
+        font-size: 24px; /* scaled down with logo */
         font-weight: 800;
         letter-spacing: -1px;
     }
 
+    /* ⭐ DARKER CARD + THIN OUTLINE */
     .card {
         width: 100%;
         max-width: 420px;
-        background: rgba(26, 26, 26, 0.92);
-        padding: 70px;
+        background: rgba(12, 12, 12, 0.92);
+        padding: 55px 48px;
         border-radius: 14px;
-        box-shadow: 0px 0px 60px rgba(0,0,0,0.55);
+
+        border: 1px solid #1a1a1a; /* thin outline */
+
+        box-shadow: 0px 0px 45px rgba(0,0,0,0.55);
         text-align: left;
         box-sizing: border-box;
-
-        /* ⭐ NO BLUR ⭐ */
-        backdrop-filter: none;
     }
 
     .card h2 {
@@ -81,13 +85,13 @@
     }
 
     .card p {
-        margin: 12px 0 32px;
+        margin: 12px 0 28px;
         color: #bdbdbd;
         font-size: 16px;
     }
 
     .input-group {
-        margin-bottom: 26px;
+        margin-bottom: 22px;
     }
 
     .input-group label {
@@ -111,17 +115,16 @@
     }
 
     .input-group input:focus {
-        border-color: #b300ff;
+        border-color: #d946ef;
     }
 
     .forgot {
         display: block;
         text-align: right;
-        margin-top: -6px;
-        margin-bottom: 28px;
+        margin-top: -2px;
+        margin-bottom: 26px;
         color: #d946ef;
         font-size: 15px;
-        cursor: pointer;
     }
 
     .login-btn {
@@ -138,7 +141,7 @@
     }
 
     .register {
-        margin-top: 28px;
+        margin-top: 26px;
         text-align: center;
         color: #d946ef;
         font-size: 15px;
@@ -147,39 +150,20 @@
     .register a {
         color: #d946ef;
         font-weight: 500;
-        cursor: pointer;
     }
 
     @media (max-width: 480px) {
         .logo {
-            width: 90px;
-            height: 90px;
+            width: 64px;
+            height: 64px;
         }
 
         .logo span {
-            font-size: 42px;
+            font-size: 30px;
         }
 
         .card {
-            padding: 30px;
-        }
-
-        .card h2 {
-            font-size: 24px;
-        }
-
-        .card p {
-            font-size: 14px;
-        }
-
-        .input-group input {
-            padding: 13px;
-            font-size: 14px;
-        }
-
-        .login-btn {
-            padding: 14px;
-            font-size: 16px;
+            padding: 35px;
         }
     }
 </style>
@@ -191,11 +175,13 @@
 
 <div class="container">
 
-    <div class="logo">
-        <span>M</span>
-    </div>
-
     <div class="card">
+
+        <!-- ⭐ SMALLER LOGO + THICKER DARK OUTLINE -->
+        <div class="logo">
+            <span>M</span>
+        </div>
+
         <h2>Welcome back</h2>
         <p>Log in to your Minemen Club account</p>
 
