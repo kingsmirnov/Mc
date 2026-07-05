@@ -16,6 +16,11 @@
 
     a { text-decoration: none; }
 
+    /* ⭐ Purple text outline on hover */
+    a:hover {
+        text-shadow: 0 0 6px #d946ef;
+    }
+
     .back-home {
         position: absolute;
         top: 22px;
@@ -37,13 +42,12 @@
 
     /* ⭐ ROTATED LOGO + NO OUTLINE */
     .logo {
-        width: 62px;
-        height: 52px;
-        background: #e911e5;
-        border: none; /* outline removed */
+        width: 56px;
+        height: 56px;
+        background: #d946ef;
+        border: none;
         border-radius: 4px;
-
-        transform: rotate(90deg); /* rotate shape */
+        transform: rotate(90deg);
 
         clip-path: polygon(
             25% 0%, 75% 0%,
@@ -58,7 +62,6 @@
         margin: 0 auto 24px auto;
     }
 
-    /* ⭐ Keep the M upright */
     .logo span {
         color: #ffffff;
         font-size: 24px;
@@ -67,19 +70,22 @@
         transform: rotate(-90deg);
     }
 
-    /* ⭐ DARKER CARD + THIN OUTLINE */
+    /* ⭐ MORE ROUNDED + MORE CENTERED CARD */
     .card {
         width: 100%;
         max-width: 420px;
         background: rgba(12, 12, 12, 0.92);
+
         padding: 55px 48px;
-        border-radius: 14px;
 
+        border-radius: 22px; /* more rounded */
         border: 1px solid #1a1a1a;
-
         box-shadow: 0px 0px 45px rgba(0,0,0,0.55);
+
         text-align: left;
         box-sizing: border-box;
+
+        margin-top: -20px; /* centers card better */
     }
 
     .card h2 {
@@ -131,17 +137,29 @@
         font-size: 15px;
     }
 
+    /* ⭐ ANIMATED LOGIN BUTTON + BLACK TEXT */
     .login-btn {
         width: 100%;
         padding: 16px;
         background: #d946ef;
         border: none;
         border-radius: 6px;
-        color: #ffffff;
+        color: #000000; /* black text */
         font-size: 17px;
         font-weight: 600;
         cursor: pointer;
         box-sizing: border-box;
+
+        transition:
+            transform 0.25s ease,
+            box-shadow 0.25s ease,
+            background 0.25s ease;
+    }
+
+    .login-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 0 18px #d946ef;
+        background: #e75aff;
     }
 
     .register {
