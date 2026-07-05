@@ -1,10 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>Login | Minemen Club</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <style>
     body {
         margin: 0;
@@ -17,20 +10,22 @@
 
     .back-home {
         position: absolute;
-        top: 28px;
-        left: 28px;
+        top: 20px;
+        left: 20px;
         color: #bdbdbd;
         font-size: 15px;
     }
 
     .container {
-        height: 100vh;
+        min-height: 100vh;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        padding: 20px;
     }
 
+    /* HEXAGON */
     .logo {
         width: 120px;
         height: 120px;
@@ -55,7 +50,8 @@
     }
 
     .card {
-        width: 420px;
+        width: 100%;
+        max-width: 420px;
         background: #1a1a1a;
         padding: 45px;
         border-radius: 14px;
@@ -136,63 +132,38 @@
         font-weight: 500;
         cursor: pointer;
     }
+
+    /* ⭐ RESPONSIVE FIXES ⭐ */
+    @media (max-width: 480px) {
+        .logo {
+            width: 90px;
+            height: 90px;
+        }
+
+        .logo span {
+            font-size: 42px;
+        }
+
+        .card {
+            padding: 30px;
+        }
+
+        .card h2 {
+            font-size: 24px;
+        }
+
+        .card p {
+            font-size: 14px;
+        }
+
+        .input-group input {
+            padding: 13px;
+            font-size: 14px;
+        }
+
+        .login-btn {
+            padding: 14px;
+            font-size: 16px;
+        }
+    }
 </style>
-</head>
-
-<body>
-
-<a class="back-home" href="https://minemen.club/">← Back to Home</a>
-
-<div class="container">
-
-    <div class="logo">
-        <span>M</span>
-    </div>
-
-    <div class="card">
-        <h2>Welcome back</h2>
-        <p>Log in to your Minemen Club account</p>
-
-        <form id="loginForm">
-            <div class="input-group">
-                <label>Email Address</label>
-                <input type="email" name="email" placeholder="you@example.com" required>
-            </div>
-
-            <div class="input-group">
-                <label>Password</label>
-                <input type="password" name="password" placeholder="Enter your password" required>
-            </div>
-
-            <a class="forgot" href="https://minemen.club/login/reset-pass">Forgot your password?</a>
-
-            <button class="login-btn">Log In</button>
-
-            <div class="register">
-                Don’t have an account? <a href="https://minemen.club/register">Register here</a>
-            </div>
-        </form>
-    </div>
-</div>
-
-<script>
-document.getElementById("loginForm").addEventListener("submit", async (e) => {
-    e.preventDefault();
-
-    const formData = new FormData(e.target);
-    const email = formData.get("email");
-    const password = formData.get("password");
-
-    const res = await fetch("/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: `email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`
-    });
-
-    const text = await res.text();
-    alert(text);
-});
-</script>
-
-</body>
-</html>
