@@ -6,19 +6,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-    /* ⭐ NORMAL BACKGROUND — CSS ONLY ⭐ */
+    /* ⭐ NORMAL SOLID BACKGROUND — NO IMAGE ⭐ */
     body {
         margin: 0;
+        background: #0f0f0f; /* CHANGE THIS COLOR IF YOU WANT */
         font-family: Inter, Arial, sans-serif;
         color: #fff;
         overflow-x: hidden;
-
-        /* YOUR NORMAL BACKGROUND */
-        background-image: url("/img/mmcbg.jpg");
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        background-attachment: fixed; /* makes it look clean */
     }
 
     a { text-decoration: none; }
@@ -69,12 +63,15 @@
     .card {
         width: 100%;
         max-width: 420px;
-        background: rgba(26, 26, 26, 0.92); /* solid, no blur */
+        background: rgba(26, 26, 26, 0.92);
         padding: 45px;
         border-radius: 14px;
         box-shadow: 0px 0px 60px rgba(0,0,0,0.55);
         text-align: left;
         box-sizing: border-box;
+
+        /* ⭐ NO BLUR ⭐ */
+        backdrop-filter: none;
     }
 
     .card h2 {
