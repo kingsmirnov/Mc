@@ -8,9 +8,22 @@
 <style>
     body {
         margin: 0;
-        background: #0f0f0f;
+        background: transparent;
         font-family: Inter, Arial, sans-serif;
         color: #fff;
+        overflow-x: hidden;
+    }
+
+    /* ⭐ FULLSCREEN BACKGROUND IMAGE ⭐ */
+    .hero-background-image {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: -1;
+        opacity: 1; /* full clarity */
     }
 
     a { text-decoration: none; }
@@ -38,7 +51,7 @@
     .logo {
         width: 120px;
         height: 120px;
-        background: #d946ef;
+        background: #b300ff;
         clip-path: polygon(
             25% 0%, 75% 0%,
             100% 50%,
@@ -61,12 +74,15 @@
     .card {
         width: 100%;
         max-width: 420px;
-        background: #1a1a1a;
+        background: rgba(26, 26, 26, 0.92); /* solid, no blur */
         padding: 45px;
         border-radius: 14px;
         box-shadow: 0px 0px 60px rgba(0,0,0,0.55);
         text-align: left;
         box-sizing: border-box;
+
+        /* ⭐ BLUR REMOVED ⭐ */
+        backdrop-filter: none;
     }
 
     .card h2 {
@@ -145,7 +161,6 @@
         cursor: pointer;
     }
 
-    /* ⭐ RESPONSIVE FIXES ⭐ */
     @media (max-width: 480px) {
         .logo {
             width: 90px;
@@ -182,6 +197,9 @@
 </head>
 
 <body>
+
+<!-- ⭐ BACKGROUND IMAGE ⭐ -->
+<img src="https://minemen.club/img/mmcbg.jpg" class="hero-background-image">
 
 <a class="back-home" href="https://minemen.club/">← Back to Home</a>
 
