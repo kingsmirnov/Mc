@@ -1,3 +1,10 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Login | Minemen Club</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <style>
     body {
         margin: 0;
@@ -14,18 +21,20 @@
         left: 20px;
         color: #bdbdbd;
         font-size: 15px;
+        z-index: 10;
     }
 
     .container {
         min-height: 100vh;
+        width: 100%;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         padding: 20px;
+        box-sizing: border-box;
     }
 
-    /* HEXAGON */
     .logo {
         width: 120px;
         height: 120px;
@@ -57,6 +66,7 @@
         border-radius: 14px;
         box-shadow: 0px 0px 60px rgba(0,0,0,0.55);
         text-align: left;
+        box-sizing: border-box;
     }
 
     .card h2 {
@@ -92,6 +102,7 @@
         color: #ffffff;
         font-size: 15px;
         outline: none;
+        box-sizing: border-box;
     }
 
     .input-group input:focus {
@@ -118,6 +129,7 @@
         font-size: 17px;
         font-weight: 600;
         cursor: pointer;
+        box-sizing: border-box;
     }
 
     .register {
@@ -167,3 +179,62 @@
         }
     }
 </style>
+</head>
+
+<body>
+
+<a class="back-home" href="https://minemen.club/">← Back to Home</a>
+
+<div class="container">
+
+    <div class="logo">
+        <span>M</span>
+    </div>
+
+    <div class="card">
+        <h2>Welcome back</h2>
+        <p>Log in to your Minemen Club account</p>
+
+        <form id="loginForm">
+            <div class="input-group">
+                <label>Email Address</label>
+                <input type="email" name="email" placeholder="you@example.com" required>
+            </div>
+
+            <div class="input-group">
+                <label>Password</label>
+                <input type="password" name="password" placeholder="Enter your password" required>
+            </div>
+
+            <a class="forgot" href="https://minemen.club/login/reset-pass">Forgot your password?</a>
+
+            <button class="login-btn">Log In</button>
+
+            <div class="register">
+                Don’t have an account? <a href="https://minemen.club/register">Register here</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+document.getElementById("loginForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.target);
+    const email = formData.get("email");
+    const password = formData.get("password");
+
+    const res = await fetch("/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: `email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`
+    });
+
+    const text = await res.text();
+    alert(text);
+});
+</script>
+
+</body>
+</html>
