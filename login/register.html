@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Register | Minemen Club</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="https://raw.githubusercontent.com/kingsmirnov/Mc/refs/heads/main/img/Login%20_%20Minemen%20Club%20-%20Google%20Chrome%207_5_2026%201_31_46%20AM.png">
+
+<style>
+    body {
+        margin: 0;
+        background: url("https://github.com/kingsmirnov/Mc/blob/main/img/mmcbg.jpg?raw=true") no-repeat center center fixed;
+        background-size: cover;
+        font-family: Inter, Arial, sans-serif;
+        color: #fff;
+        overflow-x: hidden;
+    }
+    a { text-decoration: none; }
+    a:hover { text-shadow: 0 0 6px #d946ef; }
+
+    .back-home {
+        position: absolute;
+        top: 22px;
+        left: 22px;
+        color: #bdbdbd;
+        font-size: 15px;
+    }
+
+    .container {
+        min-height: 100vh;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+
+    .logo {
+        width: 90px;
+        height: 90px;
+        margin: 0 auto 24px auto;
+    }
+
+    .logo img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+
+    .card {
+        width: 100%;
+        max-width: 420px;
+        background: rgba(12, 12, 12, 0.92);
+        padding: 55px 48px;
+        border-radius: 22px;
+        border: 1px solid #1a1a1a;
+        box-shadow: 0px 0px 45px rgba(0,0,0,0.55);
+        text-align: left;
+        box-sizing: border-box;
+        margin-top: -20px;
+    }
+
+    .card h2,
+    .card p {
+        text-align: center;
+    }
+
+    .card h2 {
+        margin: 0;
+        font-size: 28px;
+        font-weight: 700;
+    }
+
+    .card p {
+        margin: 12px 0 28px;
+        color: #bdbdbd;
+        font-size: 16px;
+    }
+
+    .input-group {
+        margin-bottom: 22px;
+    }
+
+    .input-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-size: 15px;
+        color: #d0d0d0;
+        font-weight: 500;
+    }
+
+    .input-group input {
+        width: 100%;
+        padding: 13px;
+        background: #1a1a1a;
+        border: 1px solid #3a3a3a;
+        border-radius: 6px;
+        color: #ffffff;
+        font-size: 15px;
+        outline: none;
+        box-sizing: border-box;
+    }
+
+    .input-group input:focus {
+        border-color: #d946ef;
+    }
+
+    .register-btn {
+        width: 100%;
+        padding: 16px;
+        background: #d946ef;
+        border: none;
+        border-radius: 6px;
+        color: #000000;
+        font-size: 17px;
+        font-weight: 600;
+        cursor: pointer;
+        box-sizing: border-box;
+        transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+    }
+
+    .register-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 0 18px #d946ef;
+        background: #e75aff;
+    }
+
+    .login-link {
+        margin-top: 26px;
+        text-align: center;
+        color: #d946ef;
+        font-size: 15px;
+    }
+
+    .login-link a {
+        color: #d946ef;
+        font-weight: 500;
+    }
+</style>
+</head>
+
+<body>
+
+<a class="back-home" href="/">← Back to Home</a>
+
+<div class="container">
+    <div class="card">
+        <div class="logo">
+            <img src="https://raw.githubusercontent.com/kingsmirnov/Mc/refs/heads/main/img/Login%20_%20Minemen%20Club%20-%20Google%20Chrome%207_5_2026%201_31_46%20AM.png">
+        </div>
+
+        <h2>Create an Account</h2>
+        <p>Sign up to access Minemen Market</p>
+
+        <form id="registerForm">
+            <div class="input-group">
+                <label>Email Address</label>
+                <input type="email" name="email" required>
+            </div>
+
+            <div class="input-group">
+                <label>Password</label>
+                <input type="password" name="password" required>
+            </div>
+
+            <div class="input-group">
+                <label>Confirm Password</label>
+                <input type="password" name="confirm" required>
+            </div>
+
+            <button class="register-btn">Create Account</button>
+
+            <div class="login-link">
+                Already have an account? <a href="/login/login.html">Log in</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+document.getElementById("registerForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.target);
+    const email = formData.get("email");
+    const password = formData.get("password");
+    const confirm = formData.get("confirm");
+
+    if (password !== confirm) {
+        alert("Passwords do not match.");
+        return;
+    }
+
+    const res = await fetch("/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: `email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`
+    });
+
+    const text = await res.text();
+    if (text === "success") window.location.href = "/login/login.html";
+});
+</script>
+
+</body>
+</html>
