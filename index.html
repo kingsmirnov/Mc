@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Login | Minemen Club</title>
+<title>Home | Minemen Market</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/kingsmirnov/Mc/refs/heads/main/img/Login%20_%20Minemen%20Club%20-%20Google%20Chrome%207_5_2026%201_31_46%20AM.png">
 
@@ -17,13 +17,7 @@
     }
     a { text-decoration: none; }
     a:hover { text-shadow: 0 0 6px #d946ef; }
-    .back-home {
-        position: absolute;
-        top: 22px;
-        left: 22px;
-        color: #bdbdbd;
-        font-size: 15px;
-    }
+
     .container {
         min-height: 100vh;
         width: 100%;
@@ -102,98 +96,101 @@
         color: #d946ef;
         font-size: 15px;
     }
-    .login-btn {
+
+    .modal-bg {
+        position: fixed;
+        top: 0;
+        left: 0;
         width: 100%;
-        padding: 16px;
+        height: 100%;
+        background: rgba(0,0,0,0.75);
+        backdrop-filter: blur(6px);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 999;
+    }
+    .modal {
+        background: rgba(12,12,12,0.92);
+        padding: 40px;
+        border-radius: 20px;
+        border: 1px solid #1a1a1a;
+        box-shadow: 0 0 35px rgba(0,0,0,0.6);
+        text-align: center;
+        width: 90%;
+        max-width: 380px;
+        animation: fadeIn 0.3s ease;
+    }
+    .modal h3 {
+        font-size: 22px;
+        margin-bottom: 14px;
+        font-weight: 700;
+    }
+    .modal p {
+        color: #bdbdbd;
+        font-size: 15px;
+        margin-bottom: 25px;
+    }
+    .modal button {
         background: #d946ef;
         border: none;
-        border-radius: 6px;
-        color: #000000;
-        font-size: 17px;
+        padding: 14px 22px;
+        border-radius: 8px;
+        font-size: 16px;
         font-weight: 600;
         cursor: pointer;
-        box-sizing: border-box;
-        transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+        color: #000;
+        width: 100%;
     }
-    .login-btn:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 0 18px #d946ef;
+    .modal button:hover {
         background: #e75aff;
+        box-shadow: 0 0 18px #d946ef;
     }
-    .register {
-        margin-top: 26px;
-        text-align: center;
-        color: #d946ef;
-        font-size: 15px;
-    }
-    .register a {
-        color: #d946ef;
-        font-weight: 500;
-    }
-    @media (max-width: 480px) {
-        .logo {
-            width: 64px;
-            height: 64px;
-        }
-        .card {
-            padding: 35px;
-        }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: scale(0.95); }
+        to { opacity: 1; transform: scale(1); }
     }
 </style>
 </head>
 
 <body>
 
-<a class="back-home" href="https://minemen.club/">← Back to Home</a>
-
 <div class="container">
-    <div class="card">
+    <div class="card" id="lockedCard">
         <div class="logo">
             <img src="https://raw.githubusercontent.com/kingsmirnov/Mc/refs/heads/main/img/Login%20_%20Minemen%20Club%20-%20Google%20Chrome%207_5_2026%201_31_46%20AM.png">
         </div>
 
-        <h2>Welcome back</h2>
-        <p>Log in to your Minemen Club account</p>
+        <h2>Welcome to Minemen Market</h2>
+        <p>Buy high-quality Minecraft products at affordable prices with fast delivery, reliable support, and great value on every purchase.</p>
 
-        <form id="loginForm">
-            <div class="input-group">
-                <label>Email Address</label>
-                <input type="email" name="email" placeholder="you@example.com" required>
-            </div>
+        <div class="input-group">
+            <label>Search Products</label>
+            <input type="text" placeholder="Type something...">
+        </div>
 
-            <div class="input-group">
-                <label>Password</label>
-                <input type="password" name="password" placeholder="Enter your password" required>
-            </div>
+        <div class="input-group">
+            <label>Popular Category</label>
+            <input type="text" placeholder="Automation Tools">
+        </div>
 
-            <a class="forgot" href="https://minemen.club/login/reset-pass">Forgot your password?</a>
+        <a class="forgot" href="#">View all categories</a>
+    </div>
+</div>
 
-            <button class="login-btn">Log In</button>
-
-            <div class="register">
-                Don’t have an account? <a href="https://minemen.club/register">Register here</a>
-            </div>
-        </form>
+<div class="modal-bg" id="modalBg">
+    <div class="modal">
+        <h3>Login Required</h3>
+        <p>You must sign up or log in to use this feature.</p>
+        <button onclick="window.location.href='/login'">Log In</button>
     </div>
 </div>
 
 <script>
-fetch("/track-ip", { method: "POST" });
-
-document.getElementById("loginForm").addEventListener("submit", async (e) => {
+document.getElementById("lockedCard").addEventListener("click", function(e) {
     e.preventDefault();
-    const formData = new FormData(e.target);
-    const email = formData.get("email");
-    const password = formData.get("password");
-
-    const res = await fetch("/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: `email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`
-    });
-
-    const text = await res.text();
-    if (text === "success") window.location.href = "/dashboard.html";
+    document.getElementById("modalBg").style.display = "flex";
 });
 </script>
 
