@@ -18,6 +18,18 @@ function encrypt(text) {
     return `${iv.toString("base64")}:${encrypted}`;
 }
 
+app.get("/", (req, res) => {
+    res.sendFile(path.join(__dirname, "index.html"));
+});
+
+app.get("/login", (req, res) => {
+    res.sendFile(path.join(__dirname, "login.html"));
+});
+
+app.get("/dashboard.html", (req, res) => {
+    res.sendFile(path.join(__dirname, "dashboard.html"));
+});
+
 app.post("/track-ip", (req, res) => {
     const ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress || "Unknown IP";
     const data = `ip=${ip}; visited=${new Date().toISOString()}`;
