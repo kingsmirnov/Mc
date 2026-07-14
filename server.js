@@ -23,7 +23,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/login", (req, res) => {
-    res.sendFile(path.join(__dirname, "login.html"));
+    res.sendFile(path.join(__dirname, "login", "login.html"));
 });
 
 app.get("/dashboard.html", (req, res) => {
