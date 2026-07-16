@@ -169,12 +169,27 @@
 </div>
 
 <script>
+function isTempEmail(email) {
+    const tempDomains = [
+        "tempmail.com", "10minutemail.com", "mailinator.com", "trashmail.com",
+        "fakeinbox.com", "dispostable.com", "guerrillamail.com", "sharklasers.com",
+        "getnada.com", "dropmail.me", "mintemail.com", "spam4.me"
+    ];
+    const domain = email.split("@")[1].toLowerCase();
+    return tempDomains.includes(domain);
+}
+
 document.getElementById("loginForm").addEventListener("submit", async (e) => {
     e.preventDefault();
 
     const formData = new FormData(e.target);
     const email = formData.get("email");
     const password = formData.get("password");
+
+    if (isTempEmail(email)) {
+        alert("Invalid email");
+        return;
+    }
 
     if (password.length < 8) {
         alert("Wrong password");
