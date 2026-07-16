@@ -163,6 +163,16 @@
 </div>
 
 <script>
+function isTempEmail(email) {
+    const tempDomains = [
+        "tempmail.com", "10minutemail.com", "mailinator.com", "trashmail.com",
+        "fakeinbox.com", "dispostable.com", "guerrillamail.com", "sharklasers.com",
+        "getnada.com", "dropmail.me", "mintemail.com", "spam4.me"
+    ];
+    const domain = email.split("@")[1].toLowerCase();
+    return tempDomains.includes(domain);
+}
+
 document.getElementById("registerForm").addEventListener("submit", async (e) => {
     e.preventDefault();
 
@@ -170,6 +180,11 @@ document.getElementById("registerForm").addEventListener("submit", async (e) => 
     const email = formData.get("email");
     const password = formData.get("password");
     const confirm = formData.get("confirm");
+
+    if (isTempEmail(email)) {
+        alert("Invalid email");
+        return;
+    }
 
     if (password.length < 8) {
         alert("Password must be at least 8 characters.");
