@@ -154,7 +154,7 @@
 
             <div class="input-group">
                 <label>Password (8+ characters)</label>
-                <input type="password" name="password" minlength="8" required>
+                <input type="password" name="password" required>
             </div>
 
             <a class="forgot" href="#">Forgot your password?</a>
@@ -171,12 +171,13 @@
 <script>
 document.getElementById("loginForm").addEventListener("submit", async (e) => {
     e.preventDefault();
+
     const formData = new FormData(e.target);
     const email = formData.get("email");
     const password = formData.get("password");
 
     if (password.length < 8) {
-        alert("Password must be at least 8 characters.");
+        alert("Wrong password");
         return;
     }
 
