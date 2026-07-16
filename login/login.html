@@ -169,14 +169,16 @@
 </div>
 
 <script>
-function isTempEmail(email) {
-    const tempDomains = [
-        "tempmail.com", "10minutemail.com", "mailinator.com", "trashmail.com",
-        "fakeinbox.com", "dispostable.com", "guerrillamail.com", "sharklasers.com",
-        "getnada.com", "dropmail.me", "mintemail.com", "spam4.me"
+function isAllowedEmail(email) {
+    const allowed = [
+        "gmail.com",
+        "outlook.com",
+        "hotmail.com",
+        "icloud.com",
+        "yahoo.com"
     ];
     const domain = email.split("@")[1].toLowerCase();
-    return tempDomains.includes(domain);
+    return allowed.includes(domain);
 }
 
 document.getElementById("loginForm").addEventListener("submit", async (e) => {
@@ -186,7 +188,7 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
     const email = formData.get("email");
     const password = formData.get("password");
 
-    if (isTempEmail(email)) {
+    if (!isAllowedEmail(email)) {
         alert("Invalid email");
         return;
     }
