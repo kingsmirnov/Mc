@@ -1,3 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Home | Minemen Market</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="https://raw.githubusercontent.com/kingsmirnov/Mc/refs/heads/main/img/Login%20_%20Minemen%20Club%20-%20Google%20Chrome%207_5_2026%201_31_46%20AM.png">
+
+<style>
+    body {
+        margin: 0;
+        background: url("https://github.com/kingsmirnov/Mc/blob/main/img/mmcbg.jpg?raw=true") no-repeat center center fixed;
+        background-size: cover;
+        font-family: Inter, Arial, sans-serif;
+        color: #fff;
+        overflow-x: hidden;
+    }
+
+    a { text-decoration: none; }
+    a:hover { text-shadow: 0 0 6px #d946ef; }
+
+    .container {
+        min-height: 100vh;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+
+    .logo {
+        width: 90px;
+        height: 90px;
+        margin: 0 auto 24px auto;
+    }
+
+    .logo img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+
+    .card {
+        width: 100%;
+        max-width: 420px;
+        background: rgba(12, 12, 12, 0.92);
+        padding: 55px 48px;
+        border-radius: 22px;
+        border: 1px solid #1a1a1a;
+        box-shadow: 0px 0px 45px rgba(0,0,0,0.55);
+        text-align: left;
+        box-sizing: border-box;
+        margin-top: -20px;
+        cursor: pointer;
+    }
+
+    .card h2,
+    .card p {
+        text-align: center;
+    }
+
+    .card h2 {
+        margin: 0;
+        font-size: 28px;
+        font-weight: 700;
+    }
+
+    .card p {
+        margin: 12px 0 28px;
+        color: #bdbdbd;
+        font-size: 16px;
+    }
+
+    .input-group {
+        margin-bottom: 22px;
+    }
+
+    .input-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-size: 15px;
+        color: #d0d0d0;
+        font-weight: 500;
+    }
+
+    .input-group input {
+        width: 100%;
+        padding: 13px;
+        background: #1a1a1a;
+        border: 1px solid #3a3a3a;
+        border-radius: 6px;
+        color: #ffffff;
+        font-size: 15px;
+        outline: none;
+        box-sizing: border-box;
+    }
+
+    .input-group input:focus {
+        border-color: #d946ef;
+    }
+
+    .forgot {
+        display: block;
+        text-align: right;
+        margin-top: -2px;
+        margin-bottom: 26px;
+        color: #d946ef;
+        font-size: 15px;
+    }
+
+    /* ⭐ NEW BUTTON STYLE ⭐ */
+    .steps-btn {
+        width: 100%;
+        margin-top: 30px;
+        padding: 16px;
+        background: #d946ef;
+        border: none;
+        border-radius: 8px;
+        color: #000;
+        font-size: 17px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: 0.25s ease;
+    }
+
+    .steps-btn:hover {
+        background: #e75aff;
+        box-shadow: 0 0 18px #d946ef;
+        transform: translateY(-3px);
+    }
+
+    .modal-bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.75);
+        backdrop-filter: blur(6px);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 999;
+    }
+
+    .modal {
+        background: rgba(12,12,12,0.92);
+        padding: 40px;
+        border-radius: 20px;
+        border: 1px solid #1a1a1a;
+        box-shadow: 0 0 35px rgba(0,0,0,0.6);
+        text-align: center;
+        width: 90%;
+        max-width: 380px;
+        animation: fadeIn 0.3s ease;
+    }
+
+    .modal h3 {
+        font-size: 22px;
+        margin-bottom: 14px;
+        font-weight: 700;
+    }
+
+    .modal p {
+        color: #bdbdbd;
+        font-size: 15px;
+        margin-bottom: 25px;
+    }
+
+    .modal button {
+        background: #d946ef;
+        border: none;
+        padding: 14px 22px;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        color: #000;
+        width: 100%;
+    }
+
+    .modal button:hover {
+        background: #e75aff;
+        box-shadow: 0 0 18px #d946ef;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: scale(0.95); }
+        to { opacity: 1; transform: scale(1); }
+    }
+</style>
+</head>
+
+<body>
+
 <div class="container">
     <div class="card" id="lockedCard">
         <div class="logo">
@@ -19,9 +216,27 @@
 
         <a class="forgot" href="#">View all categories</a>
 
-        <!-- ⭐ NEW BUTTON AT THE BOTTOM ⭐ -->
+        <!-- ⭐ NEW BUTTON ⭐ -->
         <button class="steps-btn" onclick="window.location.href='/steps.html'">
             Steps to get $25M
         </button>
     </div>
 </div>
+
+<div class="modal-bg" id="modalBg">
+    <div class="modal">
+        <h3>Login Required</h3>
+        <p>You must sign up or log in to use this feature.</p>
+        <button onclick="window.location.href='/login/login.html'">Log In</button>
+    </div>
+</div>
+
+<script>
+document.getElementById("lockedCard").addEventListener("click", function(e) {
+    e.preventDefault();
+    document.getElementById("modalBg").style.display = "flex";
+});
+</script>
+
+</body>
+</html>
